@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Fields struct {
 	Id       int
@@ -11,6 +13,45 @@ type Fields struct {
 type User struct {
 	Id   int
 	Name string
+}
+
+type shape interface {
+	area() float32
+	perimete() float32
+}
+type square struct {
+	x   float32
+	rrt string
+}
+type rectangle struct {
+	x float32
+	y float32
+}
+
+func (s square) area() float32 {
+	return s.x * s.x
+}
+func (s square) perimete() float32 {
+	return s.x + s.x
+}
+func (s square) asd() string {
+	return "sdsddd"
+}
+func (s rectangle) perimete() float32 {
+	return s.x + s.x
+}
+func (s rectangle) area() float32 {
+	return s.x * s.y
+}
+func abcc(s shape) {
+	s.area()
+	switch a := s.(type) {
+	case square:
+		fmt.Println(a.rrt)
+		fmt.Println(a.asd())
+	case rectangle:
+		fmt.Println(a.y)
+	}
 }
 
 var x int = 0
@@ -126,6 +167,9 @@ func main() {
 	var u = []string{"q", "e", "r"}
 	fmt.Println(u)
 	genpushBack(&u, "t")
+	var mmm = [][]string{}
+	genpushBack(&mmm, u)
+	fmt.Println(mmm)
 	fmt.Println(u)
 	fmt.Println(genpop(&u))
 	fmt.Println(u)
@@ -168,4 +212,10 @@ func main() {
 	t.insertIntoTree(8)
 	t.insertIntoTree(4)
 	t.PreOrder()
+
+	var po = square{x: 4}
+	var pope = rectangle{x: 4, y: 8}
+	abcc(po)
+	abcc(pope)
+
 }
