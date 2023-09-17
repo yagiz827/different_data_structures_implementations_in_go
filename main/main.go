@@ -4,10 +4,66 @@ import (
 	"fmt"
 )
 
-type Fields struct {
-	Id       int
-	Name     string
-	Includes []User
+type max_Heap struct {
+	heap []int
+}
+
+func (heap *max_Heap) insert() {
+
+}
+func (heap *max_Heap) findNextMax() {
+	intarray := heap.heap
+	first := intarray[0]
+	second := intarray[1]
+	if !(first > second) {
+		temp := intarray[0]
+		intarray[0] = intarray[1]
+		intarray[1] = temp
+	}
+}
+func (heap *max_Heap) popmax() int {
+	intarray := (*heap).heap
+	maxx := intarray[0]
+	heap.heap = heap.heap[1:]
+	(*heap).findNextMax()
+	return maxx
+}
+
+func iseven(data int) bool {
+	if data%2 == 0 {
+		return true
+	}
+	return false
+}
+func findParentIndex(heaplength int) int {
+	var parentIndex int
+	if iseven(heaplength) {
+		parentIndex = (heaplength / 2) - 1
+	} else {
+		parentIndex = (heaplength - 1) / 2
+	}
+	if parentIndex < 0 {
+		return 0
+	}
+	return parentIndex
+}
+func (heap *max_Heap) heapify(value int) {
+	heap.heap = append(heap.heap, value)
+	intarray := heap.heap
+	var heaplength = len(intarray) - 1
+	var index int
+	parentIndex := findParentIndex(heaplength)
+	ParentVal := intarray[parentIndex]
+	index = parentIndex
+	otherindex := heaplength
+	for value > ParentVal {
+		temp := ParentVal
+		intarray[index] = value
+		intarray[otherindex] = temp
+		otherindex = index
+		index = findParentIndex(index)
+		ParentVal = intarray[index]
+	}
 }
 
 type User struct {
@@ -165,7 +221,8 @@ func main() {
 	fmt.Println(st.pop())
 	fmt.Println(st.stack)
 	var u = []string{"q", "e", "r"}
-	fmt.Println(u)
+	fmt.Println(78)
+	fmt.Println(len(u))
 	genpushBack(&u, "t")
 	var mmm = [][]string{}
 	genpushBack(&mmm, u)
@@ -217,5 +274,29 @@ func main() {
 	var pope = rectangle{x: 4, y: 8}
 	abcc(po)
 	abcc(pope)
+	gg := max_Heap{heap: []int{4}}
+	fmt.Println(gg)
+	gg.heapify(3)
+	fmt.Println(gg)
+	gg.heapify(5)
+	fmt.Println(gg)
+	gg.heapify(15)
+	fmt.Println(gg)
+	gg.heapify(6)
+	fmt.Println(gg)
+	gg.heapify(9)
+	fmt.Println(gg)
+	gg.heapify(90)
+	fmt.Println(gg)
+	gg.heapify(67)
+	fmt.Println(gg)
+	gg.heapify(45)
+	fmt.Println(gg)
+	gg.heapify(1)
+	fmt.Println(gg)
+	fmt.Println(gg.popmax())
+	fmt.Println(gg)
+	fmt.Println(gg.popmax())
+	fmt.Println(gg)
 
 }
